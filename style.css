@@ -746,6 +746,115 @@ main {
   color: #ffffff;
 }
 
+.legacy-section {
+  padding: 8rem 2rem;
+  background: #0F0C16;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.legacy-header {
+  margin: 0 0 5rem;
+  color: #ffffff;
+  font-family: Impact, 'Oswald', 'Segoe UI', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.legacy-gold {
+  color: #D4AF37;
+}
+
+#timeline-container {
+  position: relative;
+  width: 100%;
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+}
+
+#timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #D4AF37;
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: top;
+}
+
+.timeline-node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(40px);
+  will-change: transform, opacity;
+}
+
+.timeline-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #1A1525;
+  border: 2px solid #D4AF37;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.timeline-content {
+  width: 42%;
+}
+
+.timeline-content h4 {
+  margin: 0 0 0.5rem;
+  color: #D4AF37;
+  font-family: Impact, 'Oswald', 'Segoe UI', sans-serif;
+  font-size: 1.5rem;
+}
+
+.timeline-content h5 {
+  margin: 0 0 0.75rem;
+  color: #ffffff;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.timeline-content p {
+  margin: 0;
+  color: #6b6b7b;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.node-left {
+  justify-content: flex-start;
+}
+
+.node-left .timeline-content {
+  text-align: right;
+  padding-right: 3rem;
+}
+
+.node-right {
+  justify-content: flex-end;
+}
+
+.node-right .timeline-content {
+  text-align: left;
+  padding-left: 3rem;
+}
+
 @media (max-width: 900px) {
   .panel-inner {
     grid-template-columns: 1fr;
@@ -767,6 +876,25 @@ main {
 
   .tribute-body {
     margin: 0 auto;
+  }
+
+  #timeline-line {
+    left: 20px;
+  }
+
+  .timeline-dot {
+    left: 20px;
+  }
+
+  .timeline-node {
+    justify-content: flex-end !important;
+  }
+
+  .timeline-content {
+    width: 75%;
+    text-align: left !important;
+    padding-left: 2rem !important;
+    padding-right: 0 !important;
   }
 
   .stats-grid {

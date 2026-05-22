@@ -447,3 +447,27 @@ squadForm.addEventListener("submit", (e) => {
   tl.set(squadForm, { pointerEvents: "none" });
   tl.fromTo(formSuccess, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" });
 });
+
+ScrollTrigger.create({
+  trigger: "#timeline-container",
+  start: "top 60%",
+  end: "bottom bottom",
+  scrub: 1,
+  onEnter: () => {
+    gsap.to("#timeline-line", { scaleY: 1, ease: "none" });
+  },
+  onLeaveBack: () => {
+    gsap.to("#timeline-line", { scaleY: 0, ease: "none" });
+  }
+});
+
+gsap.utils.toArray(".timeline-node").forEach((node) => {
+  ScrollTrigger.create({
+    trigger: node,
+    start: "top 80%",
+    once: true,
+    onEnter: () => {
+      gsap.to(node, { opacity: 1, y: 0, duration: 1, ease: "power3.out" });
+    }
+  });
+});
