@@ -358,3 +358,14 @@ ScrollTrigger.create({
     });
   },
 });
+
+const marqueeWrapper = document.querySelector('.marquee-wrapper');
+const marqueeTL = gsap.to(marqueeWrapper, {
+  xPercent: -50,
+  ease: 'none',
+  duration: 20,
+  repeat: -1,
+});
+
+marqueeWrapper.addEventListener('mouseenter', () => marqueeTL.pause());
+marqueeWrapper.addEventListener('mouseleave', () => marqueeTL.play());
