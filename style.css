@@ -587,6 +587,46 @@ main {
   flex-shrink: 0;
 }
 
+#hype-mode-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #000000;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.hype-text {
+  font-family: Impact, 'Oswald', 'Segoe UI', sans-serif;
+  font-size: 10vw;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-align: center;
+  color: #D4AF37;
+  opacity: 0;
+}
+
+.hype-text-white {
+  color: #ffffff;
+  margin-top: -2vw;
+}
+
+.shake-screen {
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-2px, 2px, 0); }
+  20%, 80% { transform: translate3d(4px, -4px, 0); }
+  30%, 50%, 70% { transform: translate3d(-8px, 6px, 0); }
+  40%, 60% { transform: translate3d(8px, -6px, 0); }
+}
+
 @media (max-width: 900px) {
   .panel-inner {
     grid-template-columns: 1fr;
