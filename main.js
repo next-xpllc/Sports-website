@@ -421,3 +421,29 @@ function triggerHypeMode() {
     });
   }, 4000);
 }
+
+document.querySelectorAll(".input-group input").forEach((input) => {
+  const line = input.parentElement.querySelector(".line-draw");
+
+  input.addEventListener("focus", () => {
+    anime({ targets: line, width: "100%", duration: 400, easing: "easeOutExpo" });
+  });
+
+  input.addEventListener("blur", () => {
+    if (input.value === "") {
+      anime({ targets: line, width: "0%", duration: 400, easing: "easeOutExpo" });
+    }
+  });
+});
+
+const squadForm = document.getElementById("squad-form");
+const formSuccess = document.getElementById("form-success");
+
+squadForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const tl = gsap.timeline();
+  tl.to(squadForm, { opacity: 0, y: -20, duration: 0.5, ease: "power2.in" });
+  tl.set(squadForm, { pointerEvents: "none" });
+  tl.fromTo(formSuccess, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" });
+});

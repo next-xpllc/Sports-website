@@ -627,6 +627,125 @@ main {
   40%, 60% { transform: translate3d(8px, -6px, 0); }
 }
 
+.recruitment-section {
+  padding: 6rem 2rem;
+  background: #0F0C16;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.recruit-header {
+  margin: 0 0 3rem;
+  color: #D4AF37;
+  font-family: Impact, 'Oswald', 'Segoe UI', sans-serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+#form-container {
+  width: 100%;
+  max-width: 32rem;
+  position: relative;
+}
+
+#squad-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+.input-group {
+  position: relative;
+  width: 100%;
+}
+
+.input-group label {
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  color: #6b6b7b;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.input-group input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #3a3a4a;
+  color: #ffffff;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input-group input:focus ~ label,
+.input-group input:valid ~ label {
+  transform: translateY(-20px);
+  font-size: 0.7rem;
+  color: #D4AF37;
+}
+
+.line-draw {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: #D4AF37;
+  width: 0;
+}
+
+.submit-btn {
+  margin-top: 1rem;
+  padding: 1rem 2rem;
+  border: 1px solid #D4AF37;
+  color: #D4AF37;
+  background: transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.9rem;
+  cursor: none;
+  align-self: center;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #D4AF37;
+  color: #000000;
+}
+
+#form-success {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  text-align: center;
+}
+
+#form-success h4 {
+  margin: 0 0 0.5rem;
+  color: #D4AF37;
+  font-family: Impact, 'Oswald', 'Segoe UI', sans-serif;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+#form-success p {
+  margin: 0;
+  color: #ffffff;
+}
+
 @media (max-width: 900px) {
   .panel-inner {
     grid-template-columns: 1fr;
