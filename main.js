@@ -152,3 +152,40 @@ ScrollTrigger.create({
     });
   },
 });
+
+const bgAudio = document.getElementById('bg-audio');
+const audioToggle = document.getElementById('audio-toggle');
+const soundBars = document.querySelectorAll('.sound-bar');
+
+const eqTL = gsap.timeline({ paused: true, repeat: -1, yoyo: true });
+
+soundBars.forEach((bar, i) => {
+  eqTL.to(bar, {
+    scaleY: gsap.utils.random(0.3, 1.8),
+    duration: gsap.utils.random(0.3, 0.6),
+    ease: 'power1.inOut',
+  }, i * 0.1);
+});
+
+audioToggle.addEventListener('click', () => {
+  if (bgAudio.paused) {
+    bgAudio.play();
+    audioToggle.classList.add('is-playing');
+    eqTL.play();
+  } else {
+    bgAudio.pause();
+    audioToggle.classList.remove('is-playing');
+    eqTL.pause();
+  }
+});
+
+let audioPrimed = false;
+document.body.addEventListener('click', () => {
+  if (!audioPrimed) {
+    audioPrimed = true;
+    bgAudio.play().then(() => {
+      audioToggle.classList.add('is-playing');
+      eqTL.play();
+    }).catch(() => {});
+  }
+}, { once: true });

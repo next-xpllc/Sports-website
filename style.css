@@ -337,6 +337,42 @@ main {
   font-size: 0.85rem;
 }
 
+@media (pointer: coarse) {
+  #custom-cursor { display: none !important; }
+  body { cursor: auto !important; }
+}
+
+#audio-toggle {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9000;
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  background: transparent;
+  border: none;
+  cursor: none;
+  padding: 8px;
+}
+
+.sound-bar {
+  display: block;
+  width: 3px;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: background 0.3s ease;
+}
+
+.sound-bar:nth-child(1) { height: 10px; }
+.sound-bar:nth-child(2) { height: 16px; }
+.sound-bar:nth-child(3) { height: 10px; }
+.sound-bar:nth-child(4) { height: 14px; }
+
+#audio-toggle.is-playing .sound-bar {
+  background: #D4AF37;
+}
+
 @media (max-width: 900px) {
   .panel-inner {
     grid-template-columns: 1fr;
