@@ -1,5 +1,12 @@
 gsap.registerPlugin(ScrollTrigger);
 
+window.addEventListener("DOMContentLoaded", () => {
+  const tl = gsap.timeline();
+  tl.to("#transition-text", { y: 0, duration: 0.6, ease: "power3.out" });
+  tl.to("#transition-text", { y: 0, duration: 0.3 });
+  tl.to("#page-transition", { yPercent: -100, duration: 1, ease: "power4.inOut" });
+});
+
 const lenis = new Lenis({
   duration: 1.2,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -519,4 +526,22 @@ document.querySelectorAll(".kit-card").forEach((card) => {
   card.addEventListener("mouseleave", () => {
     gsap.to(card, { rotateY: 0, rotateX: 0, ease: "elastic.out(1, 0.3)", duration: 1 });
   });
+});
+
+document.addEventListener("click", (e) => {
+  const link = e.target.closest("a");
+  if (!link) return;
+  const href = link.getAttribute("href");
+  if (!href || href.startsWith("http") || href.startsWith("#") || href.startsWith("mailto")) return;
+
+  e.preventDefault();
+  const overlay = document.getElementById("page-transition");
+  gsap.set(overlay, { yPercent: 100 });
+  gsap.set("#transition-text", { y: "100%" });
+
+  const tl = gsap.timeline();
+  tl.to("#transition-text", { y: 0, duration: 0.4, ease: "power3.out" });
+  tl.to(overlay, { yPercent: 0, duration: 0.8, ease: "power4.inOut", onComplete: () => {
+    window.location.href = href;
+  } }, "-=0.2");
 });

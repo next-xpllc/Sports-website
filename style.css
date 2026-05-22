@@ -980,6 +980,33 @@ main {
   transform: translateZ(50px);
 }
 
+#page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #0F0C16;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transform: translateY(0);
+}
+
+#page-transition h2 {
+  color: #D4AF37;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 900;
+  font-family: Impact, 'Oswald', 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+#transition-text {
+  display: block;
+  transform: translateY(100%);
+}
+
 @media (max-width: 900px) {
   .panel-inner {
     grid-template-columns: 1fr;
