@@ -373,6 +373,104 @@ main {
   background: #D4AF37;
 }
 
+.player-panel.clickable {
+  cursor: none;
+}
+
+.modal-container {
+  position: fixed;
+  inset: 0;
+  z-index: 8500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+}
+
+.modal-card {
+  position: relative;
+  max-width: 42rem;
+  width: 90%;
+  padding: 3rem;
+  background: #1A1525;
+  border: 1px solid #D4AF37;
+  border-radius: 8px;
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+#modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: #ffffff;
+  font-size: 1.75rem;
+  font-weight: 700;
+  background: transparent;
+  border: none;
+  cursor: none;
+  line-height: 1;
+  padding: 0;
+}
+
+#modal-profile-content h2 {
+  margin: 0 0 0.5rem;
+  font-family: Impact, 'Oswald', 'Segoe UI', sans-serif;
+  font-size: 2.2rem;
+  color: #D4AF37;
+  text-transform: uppercase;
+}
+
+#modal-profile-content .modal-position {
+  margin: 0 0 1.5rem;
+  color: #c4c0d0;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+#modal-profile-content .modal-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+#modal-profile-content .modal-stat {
+  padding: 1rem;
+  background: rgba(212, 175, 55, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 6px;
+}
+
+#modal-profile-content .modal-stat-label {
+  margin: 0 0 0.25rem;
+  color: #D4AF37;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+#modal-profile-content .modal-stat-value {
+  margin: 0;
+  color: #ffffff;
+  font-family: Impact, 'Oswald', 'Segoe UI', sans-serif;
+  font-size: 1.6rem;
+}
+
+#modal-profile-content .modal-bio {
+  margin: 0;
+  color: #c4c0d0;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
 @media (max-width: 900px) {
   .panel-inner {
     grid-template-columns: 1fr;

@@ -25,7 +25,7 @@ window.addEventListener('mousemove', (e) => {
   });
 });
 
-document.querySelectorAll('a, button, .magnetic-btn, [role="button"]').forEach((el) => {
+document.querySelectorAll('a, button, .magnetic-btn, [role="button"], .clickable').forEach((el) => {
   el.addEventListener('mouseenter', () => {
     gsap.to(cursor, { scale: 1.5, opacity: 0.7, duration: 0.2 });
   });
@@ -189,3 +189,126 @@ document.body.addEventListener('click', () => {
     }).catch(() => {});
   }
 }, { once: true });
+
+const playerData = [
+  {
+    name: 'Ratul',
+    position: 'Left Wing',
+    jersey: '#26 (Actual #11)',
+    form: 'Unstoppable',
+    keyAttr: 'Acceleration',
+    pace: '94',
+    dribbling: '89',
+    bio: 'A lightning-fast winger who terrorizes defenses with explosive pace and clinical finishing. Ratul is the heartbeat of Uddam 26\'s attack, cutting inside from the left flank to create scoring opportunities out of nothing.',
+  },
+  {
+    name: 'Mahid',
+    position: 'Central Midfield',
+    jersey: '#8',
+    form: 'Dominant',
+    keyAttr: 'Vision',
+    pace: '78',
+    dribbling: '85',
+    bio: 'The midfield engine who dictates tempo and controls the rhythm of every match. Mahid\'s exceptional vision and passing range make him the creative fulcrum of Uddam 26\'s buildup play.',
+  },
+  {
+    name: 'Tasfir Ahmed Shahadat',
+    position: 'Central Midfield',
+    jersey: '#10',
+    form: 'Sharper',
+    keyAttr: 'Passing',
+    pace: '76',
+    dribbling: '82',
+    bio: 'A composed and intelligent playmaker who reads the game two steps ahead. Tasfir\'s pinpoint passing and tactical awareness drive Uddam 26 forward with precision and purpose.',
+  },
+  {
+    name: 'Shariar Abid',
+    position: 'Right Back',
+    jersey: '#2',
+    form: 'Solid',
+    keyAttr: 'Tackling',
+    pace: '82',
+    dribbling: '74',
+    bio: 'A tenacious defender who combines grit with intelligence. Shariar locks down the right flank and launches counter-attacks with well-timed interceptions and surging overlaps.',
+  },
+  {
+    name: 'Siyad Hasan Nirob',
+    position: 'Center Back',
+    jersey: '#4',
+    form: 'Commanding',
+    keyAttr: 'Strength',
+    pace: '70',
+    dribbling: '68',
+    bio: 'The defensive rock of Uddam 26. Siyad dominates aerial duels and organizes the backline with authority. His leadership and physical presence make him indispensable.',
+  },
+  {
+    name: 'Sadiqul Islam',
+    position: 'Striker',
+    jersey: '#9',
+    form: 'Fearless',
+    keyAttr: 'Finishing',
+    pace: '88',
+    dribbling: '80',
+    bio: 'A relentless striker who lives for the big moments. Sadiqul\'s fearless mentality and clinical finishing in the box make him Uddam 26\'s most dangerous weapon in front of goal.',
+  },
+];
+
+const modal = document.getElementById('player-modal');
+const modalOverlay = modal.querySelector('.modal-overlay');
+const modalCard = modal.querySelector('.modal-card');
+const modalContent = document.getElementById('modal-profile-content');
+const modalClose = document.getElementById('modal-close');
+
+function openModal(index) {
+  const data = playerData[index];
+  modalContent.innerHTML = `
+    <h2>${data.name}</h2>
+    <p class="modal-position">${data.position} &mdash; ${data.jersey}</p>
+    <div class="modal-stats">
+      <div class="modal-stat">
+        <p class="modal-stat-label">Form</p>
+        <p class="modal-stat-value">${data.form}</p>
+      </div>
+      <div class="modal-stat">
+        <p class="modal-stat-label">Key Attribute</p>
+        <p class="modal-stat-value">${data.keyAttr}</p>
+      </div>
+      <div class="modal-stat">
+        <p class="modal-stat-label">Pace</p>
+        <p class="modal-stat-value">${data.pace}</p>
+      </div>
+      <div class="modal-stat">
+        <p class="modal-stat-label">Dribbling</p>
+        <p class="modal-stat-value">${data.dribbling}</p>
+      </div>
+    </div>
+    <p class="modal-bio">${data.bio}</p>
+  `;
+
+  lenis.stop();
+  modal.style.display = 'flex';
+
+  gsap.fromTo(modalOverlay, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'power2.out' });
+  gsap.fromTo(modalCard, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'power4.out', delay: 0.1 });
+}
+
+function closeModal() {
+  gsap.to(modalCard, { opacity: 0, scale: 0.9, duration: 0.3, ease: 'power3.in' });
+  gsap.to(modalOverlay, {
+    opacity: 0,
+    duration: 0.3,
+    ease: 'power2.in',
+    delay: 0.1,
+    onComplete: () => {
+      modal.style.display = 'none';
+      lenis.start();
+    },
+  });
+}
+
+document.querySelectorAll('.player-panel.clickable').forEach((panel, i) => {
+  panel.addEventListener('click', () => openModal(i));
+});
+
+modalClose.addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', closeModal);
