@@ -505,3 +505,18 @@ gsap.utils.toArray(".timeline-node").forEach((node) => {
     }
   });
 });
+
+document.querySelectorAll(".kit-card").forEach((card) => {
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    const rotateY = (x / rect.width) * 30;
+    const rotateX = -(y / rect.height) * 30;
+    gsap.to(card, { rotateY, rotateX, ease: "power2.out", duration: 0.5 });
+  });
+
+  card.addEventListener("mouseleave", () => {
+    gsap.to(card, { rotateY: 0, rotateX: 0, ease: "elastic.out(1, 0.3)", duration: 1 });
+  });
+});
