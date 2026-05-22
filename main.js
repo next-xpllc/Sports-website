@@ -31,3 +31,19 @@ gsap.to('.roster-wrapper', {
 ScrollTrigger.addEventListener('refreshInit', () => {
   gsap.set('.roster-wrapper', { clearProps: 'xPercent' });
 });
+
+const tributeTL = anime.timeline({ autoplay: false });
+
+tributeTL.add({
+  targets: '#tribute-path',
+  strokeDashoffset: [anime.setDashoffset, 0],
+  duration: 2000,
+  easing: 'easeInOutSine',
+});
+
+ScrollTrigger.create({
+  trigger: '#tribute-arena',
+  start: 'top 80%',
+  onEnter: () => tributeTL.play(),
+  once: true,
+});
