@@ -312,3 +312,49 @@ document.querySelectorAll('.player-panel.clickable').forEach((panel, i) => {
 
 modalClose.addEventListener('click', closeModal);
 modalOverlay.addEventListener('click', closeModal);
+
+const cdDays = document.getElementById('cd-days');
+const cdHours = document.getElementById('cd-hours');
+const cdMinutes = document.getElementById('cd-minutes');
+const cdSeconds = document.getElementById('cd-seconds');
+
+function updateCountdown() {
+  const target = new Date('2026-08-01T00:00:00');
+  const now = new Date();
+  const diff = target - now;
+
+  if (diff <= 0) {
+    cdDays.textContent = '00';
+    cdHours.textContent = '00';
+    cdMinutes.textContent = '00';
+    cdSeconds.textContent = '00';
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  cdDays.textContent = String(days).padStart(2, '0');
+  cdHours.textContent = String(hours).padStart(2, '0');
+  cdMinutes.textContent = String(minutes).padStart(2, '0');
+  cdSeconds.textContent = String(seconds).padStart(2, '0');
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+ScrollTrigger.create({
+  trigger: '#countdown-arena',
+  start: 'top 85%',
+  once: true,
+  onEnter: () => {
+    gsap.to('#countdown-arena', {
+      opacity: 1,
+      y: 0,
+      duration: 1.2,
+      ease: 'power2.out',
+    });
+  },
+});
