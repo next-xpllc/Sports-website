@@ -1,14 +1,50 @@
 gsap.registerPlugin(ScrollTrigger);
 
-gsap.fromTo('.hero-title',
+const cursor = document.getElementById('custom-cursor');
+
+window.addEventListener('mousemove', (e) => {
+  gsap.to(cursor, {
+    x: e.clientX,
+    y: e.clientY,
+    duration: 0.15,
+    ease: 'power2.out',
+  });
+});
+
+const loaderCount = document.getElementById('loader-count');
+const preloader = document.getElementById('preloader');
+const proxy = { val: 0 };
+
+const masterTL = gsap.timeline();
+
+masterTL.to(proxy, {
+  val: 100,
+  duration: 2,
+  ease: 'power2.inOut',
+  onUpdate: () => {
+    loaderCount.textContent = Math.round(proxy.val) + '%';
+  },
+});
+
+masterTL.to(preloader, {
+  yPercent: -100,
+  duration: 0.8,
+  ease: 'power4.inOut',
+});
+
+masterTL.fromTo('.hero-title',
   { opacity: 0, y: 50 },
-  { opacity: 1, y: 0, duration: 1.5, ease: 'power3.out' }
+  { opacity: 1, y: 0, duration: 1.5, ease: 'power3.out' },
+  '-=0.3'
 );
 
-gsap.fromTo('.hero-subtitle',
+masterTL.fromTo('.hero-subtitle',
   { opacity: 0, y: 50 },
-  { opacity: 1, y: 0, duration: 1.5, ease: 'power3.out', delay: 0.3 }
+  { opacity: 1, y: 0, duration: 1.5, ease: 'power3.out', delay: 0.3 },
+  '-=1.5'
 );
+
+masterTL.set(document.body, { overflowY: 'auto' });
 
 const panels = gsap.utils.toArray('.player-panel');
 const totalPanels = panels.length;

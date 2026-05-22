@@ -20,6 +20,38 @@ html, body {
 
 body {
   overflow-x: hidden;
+  overflow-y: hidden;
+  cursor: none;
+}
+
+#preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+}
+
+#loader-count {
+  color: #D4AF37;
+  font-family: Impact, 'Oswald', 'Segoe UI', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+#custom-cursor {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: #D4AF37;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
 }
 
 main {
