@@ -448,6 +448,40 @@ squadForm.addEventListener("submit", (e) => {
   tl.fromTo(formSuccess, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" });
 });
 
+const playVideoBtn = document.getElementById('play-video-btn');
+const closeVideoBtn = document.getElementById('close-video-btn');
+const videoModal = document.getElementById('video-modal');
+const videoWrapper = document.getElementById('video-wrapper');
+const highlightReel = document.getElementById('highlight-reel');
+
+const videoModalTL = gsap.timeline({ paused: true });
+
+videoModalTL
+  .to(videoModal, { opacity: 1, duration: 0.4, ease: 'power2.out' })
+  .to(videoWrapper, { scale: 1, opacity: 1, duration: 0.5, ease: 'power4.out' }, '-=0.2');
+
+playVideoBtn.addEventListener('click', () => {
+  lenis.stop();
+  videoModal.style.display = 'flex';
+  videoModalTL.play();
+  highlightReel.play();
+});
+
+function closeVideoModal() {
+  highlightReel.pause();
+  videoModalTL.reverse().then(() => {
+    videoModal.style.display = 'none';
+    lenis.start();
+  });
+}
+
+closeVideoBtn.addEventListener('click', closeVideoModal);
+videoModal.addEventListener('click', (e) => {
+  if (e.target === videoModal) {
+    closeVideoModal();
+  }
+});
+
 ScrollTrigger.create({
   trigger: "#timeline-container",
   start: "top 60%",
