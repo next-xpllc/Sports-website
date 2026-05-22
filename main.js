@@ -47,3 +47,26 @@ ScrollTrigger.create({
   onEnter: () => tributeTL.play(),
   once: true,
 });
+
+const statNumbers = document.querySelectorAll('.stat-number');
+
+ScrollTrigger.create({
+  trigger: '#stats-arena',
+  start: 'top 80%',
+  once: true,
+  onEnter: () => {
+    statNumbers.forEach((el) => {
+      const target = parseInt(el.getAttribute('data-target'), 10);
+      anime({
+        targets: { value: 0 },
+        value: target,
+        round: 1,
+        duration: 2500,
+        easing: 'easeOutExpo',
+        update: (anim) => {
+          el.textContent = anim.animations[0].currentValue;
+        },
+      });
+    });
+  },
+});
