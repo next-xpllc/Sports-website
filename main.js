@@ -1,5 +1,19 @@
 gsap.registerPlugin(ScrollTrigger);
 
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smoothWheel: true,
+});
+
+lenis.on('scroll', ScrollTrigger.update);
+
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000);
+});
+
+gsap.ticker.lagSmoothing(0);
+
 const cursor = document.getElementById('custom-cursor');
 
 window.addEventListener('mousemove', (e) => {
@@ -8,6 +22,38 @@ window.addEventListener('mousemove', (e) => {
     y: e.clientY,
     duration: 0.15,
     ease: 'power2.out',
+  });
+});
+
+document.querySelectorAll('a, button, .magnetic-btn, [role="button"]').forEach((el) => {
+  el.addEventListener('mouseenter', () => {
+    gsap.to(cursor, { scale: 1.5, opacity: 0.7, duration: 0.2 });
+  });
+  el.addEventListener('mouseleave', () => {
+    gsap.to(cursor, { scale: 1, opacity: 1, duration: 0.2 });
+  });
+});
+
+document.querySelectorAll('.magnetic-btn').forEach((btn) => {
+  btn.addEventListener('mousemove', (e) => {
+    const rect = btn.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left - rect.width / 2;
+    const offsetY = e.clientY - rect.top - rect.height / 2;
+    gsap.to(btn, {
+      x: offsetX * 0.4,
+      y: offsetY * 0.4,
+      duration: 0.3,
+      ease: 'power2.out',
+    });
+  });
+
+  btn.addEventListener('mouseleave', () => {
+    gsap.to(btn, {
+      x: 0,
+      y: 0,
+      duration: 0.6,
+      ease: 'elastic.out(1, 0.3)',
+    });
   });
 });
 
